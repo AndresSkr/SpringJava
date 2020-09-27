@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,18 @@ public class PasajerosService {
 	IPasajeroDao iPasajeroDao;
 	
 	public List<Pasajero> listar(){
-		return iPasajeroDao.findAll();
+		return (List<Pasajero>) iPasajeroDao.findAll();
 	}
-
+	
+	public Pasajero consultar(int id) {
+		return iPasajeroDao.findById(id).get();
+	}
+	
+	public Pasajero Guardar(Pasajero pasajero) {
+		return iPasajeroDao.save(pasajero);
+	}
+	
+	public void Delete(int id) {
+		 iPasajeroDao.deleteById(id);
+	}
 }
