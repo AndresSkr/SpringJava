@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class PasajeroController {
 	@Autowired
 	PasajerosService pasajeroService;
 	Response res;
+	
 	@GetMapping("/pasajeros")
 	public List<Pasajero> listar(){
 		return pasajeroService.listar();
@@ -37,6 +39,11 @@ public class PasajeroController {
 	@PostMapping("/pasajeros")
 	public Response guardar(@RequestBody Pasajero pasajero){
 		return pasajeroService.Guardar(pasajero);
+	}
+	
+	@PutMapping("/pasajeros")
+	public Response Actualizar(@RequestBody Pasajero pasajeroActualizar) {
+		return pasajeroService.Actualizar(pasajeroActualizar);
 	}
 	
 	@DeleteMapping("/pasajeros/{id}")

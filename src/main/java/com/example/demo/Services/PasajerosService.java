@@ -16,6 +16,7 @@ public class PasajerosService {
 	@Autowired
 	IPasajeroDao iPasajeroDao;
 	Response res = new Response();
+	
 	public List<Pasajero> listar(){
 		return (List<Pasajero>) iPasajeroDao.findAll();
 	}
@@ -60,6 +61,36 @@ public class PasajerosService {
 		
 		
 	}
+	
+	
+	
+	
+	public Response Actualizar(Pasajero pasajeroActualizar) {
+			
+			try {
+				Pasajero existePasajero=consultar(pasajeroActualizar.getId());
+				
+				if(existePasajero.getId()==0 ) {
+					res.setMessage("El usuario que desea Actualizar no Existe");
+					res.setStatus(false);
+					return res;
+				}else {
+					
+					iPasajeroDao.save(pasajeroActualizar);
+					res.setMessage("Registro Actualizado Correctamente");
+					res.setStatus(true);
+					return res;
+				}
+			
+				
+			} catch (Exception e) {
+				res.setMessage(e.getMessage());
+				res.setStatus(false);
+				return res;
+			}
+			
+			
+		}
 	
 	public Response Delete(int id) {
 		try {
